@@ -1,26 +1,58 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="wrapper">
+    <base-container v-if="!burgerMenuIsOpen">
+      <nav-bar @openMenu="burgerToggle" />
+      <router-view />
+    </base-container>
+    <base-container v-else>
+      <burger-menu @closeMenu="burgerToggle" />
+    </base-container>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BaseContainer from "./components/UI/BaseContainer.vue";
+import NavBar from "./components/UI/NavBar.vue";
+import BurgerMenu from "./components/UI/BurgerMenu.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    BaseContainer,
+    NavBar,
+    BurgerMenu,
+  },
+  data() {
+    return {
+      burgerMenuIsOpen: false,
+    };
+  },
+  methods: {
+    burgerToggle() {
+      this.burgerMenuIsOpen = !this.burgerMenuIsOpen;
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  background-color: #181818;
+  color: white;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 </style>
