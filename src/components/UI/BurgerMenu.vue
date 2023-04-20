@@ -3,7 +3,7 @@
     <div @click="$emit('closeMenu')" class="close-button">&#10006;</div>
     <div class="menu">
       <p @click="navigateTo('home')">Главная</p>
-      <p>Информация о тесте</p>
+      <p @click="navigateTo('about')">Информация о тесте</p>
       <p @click="navigateTo('test')">Пройти тест</p>
     </div>
   </div>

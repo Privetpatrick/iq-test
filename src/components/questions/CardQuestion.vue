@@ -1,13 +1,19 @@
 <template>
   <div class="question-container">
-    <h1>{{ questionTitle }}</h1>
-    <div class="grid">
-      <color-radio-input
+    <h1>{{ questionTitle }}<br />{{ questionDescription }}</h1>
+    <img
+      v-if="this.image !== 'star'"
+      src="../../assets/card-image-figure.png"
+    />
+    <img v-else src="../../assets/card-image-star.png" />
+    <div class="radio-inputs-container">
+      <card-radio-input
         v-for="value in values"
         :key="value"
         :value="value"
         @answer="pickAnswer"
-      />
+        >{{ value }}</card-radio-input
+      >
     </div>
     <base-button class="button" @click="submitAnswer" :disabled="!value"
       >далее</base-button
@@ -17,15 +23,15 @@
 
 <script>
 import BaseButton from "../UI/BaseButton.vue";
-import ColorRadioInput from "../UI/ColorRadioInput.vue";
+import CardRadioInput from "../UI/CardRadioInput.vue";
 import { actions } from "../../store/index";
 
 export default {
   components: {
     BaseButton,
-    ColorRadioInput,
+    CardRadioInput,
   },
-  props: ["questionTitle", "questionDescription", "values"],
+  props: ["questionTitle", "image", "values"],
   data() {
     return {
       value: "",
@@ -46,11 +52,6 @@ export default {
 </script>
 
 <style scoped>
-.grid {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 21px;
-}
 .question-container {
   width: 100%;
   height: 100%;
@@ -60,7 +61,8 @@ export default {
 }
 
 h1 {
-  margin: 101px 30px 38px 30px;
+  margin-top: 101px;
+  margin-bottom: 38px;
   font-family: "PT Serif";
   font-style: normal;
   font-weight: 400;
@@ -70,8 +72,19 @@ h1 {
   letter-spacing: 0.05em;
 }
 
+.radio-inputs-container {
+  margin: 23px 35px 0 35px;
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
 .button {
   margin-top: auto;
   margin-bottom: 25px;
+}
+
+img {
+  margin-top: 74px;
 }
 </style>

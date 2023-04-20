@@ -2,7 +2,7 @@
   <label>
     <input
       type="radio"
-      :name="name"
+      name="radio-input"
       :value="value"
       @change="$emit('answer', $event.target.value)"
     />
@@ -20,7 +20,7 @@ export default {
 <style scoped>
 label {
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   background: rgb(242, 243, 243, 0.15);
   display: flex;
   justify-content: flex-start;
@@ -51,8 +51,8 @@ span {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  padding-right: 20px;
 }
 
 label > input[type="radio"]:checked + * {

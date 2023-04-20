@@ -1,12 +1,12 @@
 <template>
-  <label :style="{ backgroundColor: value }">
+  <label>
     <input
       type="radio"
       name="radio-input"
       :value="value"
       @change="$emit('answer', $event.target.value)"
     />
-    <span></span>
+    <span><slot></slot></span>
   </label>
 </template>
 
@@ -19,12 +19,10 @@ export default {
 
 <style scoped>
 label {
-  width: 75;
-  height: 75px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  width: 41px;
+  height: 41px;
   cursor: pointer;
+  background-color: white;
 }
 
 label > input[type="radio"] {
@@ -33,19 +31,23 @@ label > input[type="radio"] {
 
 label > input[type="radio"] + *::before {
   content: "";
-  width: 75px;
-  height: 75px;
 }
 
 span {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  font-family: "PT Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 49px;
+  color: #0d0c11;
 }
 
 label > input[type="radio"]:checked + * {
-  outline: 6px solid #ffc700;
+  border: 6px solid #ffc700;
 }
 </style>

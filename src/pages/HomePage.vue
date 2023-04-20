@@ -2,25 +2,31 @@
   <div class="background">
     <p>Пройдите точный и быстрый</p>
     <h1 class="title">тест на определение IQ</h1>
-    <base-button @click="navigateTo" class="button">Пройти тест</base-button>
+    <img src="../assets/brain.png" />
+    <base-button @click="navigateTo('test')" class="button"
+      >Пройти тест</base-button
+    >
     <p class="text">
       <span>И получите рекомендации по развитию своего интеллекта</span><br />и
       улучшению финансового благосостояния и личной жизни
     </p>
-    <div class="more">подробнее</div>
+    <div @click="navigateTo('about')" class="more-container">
+      <div class="more-logo"></div>
+      <div class="more">Подробнее</div>
+    </div>
   </div>
 </template>
 
 <script>
-import BaseButton from "@/components/UI/BaseButton.vue";
+import BaseButton from "../components/UI/BaseButton.vue";
 
 export default {
   components: {
     BaseButton,
   },
   methods: {
-    navigateTo() {
-      this.$router.push("/test");
+    navigateTo(value) {
+      this.$router.push("/" + value);
     },
   },
 };
@@ -30,7 +36,7 @@ export default {
 .background {
   width: 100%;
   height: calc(100vh - 46px);
-  background-image: url("../assets/home-backround.png");
+  background-image: url("../assets/test-background.png");
   background-position: center;
   display: flex;
   flex-direction: column;
@@ -63,8 +69,12 @@ p {
   padding: 0 50px;
 }
 
+img {
+  width: 220px;
+}
+
 .button {
-  margin-top: 150px;
+  margin-top: 30px;
 }
 
 .text {
@@ -82,8 +92,29 @@ p {
   color: #ffc700;
 }
 
-.more {
+.more-container {
   margin-top: auto;
   margin-bottom: 11px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.more-logo {
+  width: 16px;
+  height: 16px;
+  background-image: url("../assets/arrow.svg");
+  cursor: pointer;
+}
+
+.more {
+  font-family: "PT Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 11px;
+  text-align: center;
+  letter-spacing: 0.05em;
 }
 </style>

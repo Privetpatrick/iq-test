@@ -19,6 +19,7 @@ button {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #0d0c11;
+  border: none;
 }
 
 .reverse {

@@ -4,8 +4,9 @@ export const store = createStore({
   state() {
     return {
       currentQuestion: 1,
-      numberOfQuestions: 14,
+      numberOfQuestions: 12,
       answers: [],
+      pass: false,
     };
   },
   getters: {
@@ -18,6 +19,9 @@ export const store = createStore({
     getAnswers(state) {
       return state.answers;
     },
+    getPass(state) {
+      return state.pass;
+    },
   },
   mutations: {
     setCurrentQuestion(state) {
@@ -26,15 +30,22 @@ export const store = createStore({
     addAnswer(state, answer) {
       state.answers.push(answer);
     },
+    setPass(state) {
+      state.pass = true;
+    },
   },
   actions: {
     submitAnswer(context, answer) {
       context.commit("setCurrentQuestion");
       context.commit("addAnswer", answer);
     },
+    setPass(context) {
+      context.commit("setPass");
+    },
   },
 });
 
 export const actions = {
   SUBMIT_ANSWER: "submitAnswer",
+  SET_PASS: "setPass",
 };

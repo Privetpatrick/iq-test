@@ -1,10 +1,10 @@
 <template>
   <div class="question-container">
     <h1>{{ questionTitle }}<br />{{ questionDescription }}</h1>
+    <img v-if="image" src="../../assets/image-question.png" />
     <base-radio-input
       v-for="value in values"
       :key="value"
-      :name="name"
       :value="value"
       @answer="pickAnswer"
       >{{ value }}</base-radio-input
@@ -25,7 +25,7 @@ export default {
     BaseButton,
     BaseRadioInput,
   },
-  props: ["questionTitle", "questionDescription", "values", "name"],
+  props: ["questionTitle", "questionDescription", "values", "image"],
   data() {
     return {
       value: "",
@@ -69,5 +69,9 @@ h1 {
 .button {
   margin-top: auto;
   margin-bottom: 25px;
+}
+
+img {
+  margin-bottom: 16px;
 }
 </style>

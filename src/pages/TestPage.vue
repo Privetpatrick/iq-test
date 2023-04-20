@@ -1,36 +1,31 @@
 <template>
   <div class="test-container">
     <title-logo />
-    <progress-bar />
+    <progress-bar v-if="!this.$store.getters.getPass" />
     <base-question
       v-if="this.$store.getters.getCurrentQuestion === 1"
       question-title="Ваш пол:"
-      name="sex"
       :values="['Мужчина', 'Женщина']"
     />
     <base-question
       v-if="this.$store.getters.getCurrentQuestion === 2"
       question-title="Укажите ваш возраст:"
-      name="age"
       :values="['До 18', 'От 18 до 28', 'От 29 до 35', 'От 36']"
     />
     <base-question
       v-if="this.$store.getters.getCurrentQuestion === 3"
       question-title="Выберите лишнее:"
-      name="houses"
       :values="['Дом', 'Шалаш', 'Бунгало', 'Скамейка', 'Хижина']"
     />
     <base-question
       v-if="this.$store.getters.getCurrentQuestion === 4"
       question-title="Продолжите числовой ряд:"
       question-description="18 20 24 32"
-      name="numbers"
       :values="['62', '48', '74', '57', '60', '77']"
     />
     <color-question
       v-if="this.$store.getters.getCurrentQuestion === 5"
       question-title="Выберите цвет, который сейчас наиболее Вам приятен:"
-      name="color"
       :values="[
         '#A8A8A8',
         '#0000A9',
@@ -46,7 +41,6 @@
     <color-question
       v-if="this.$store.getters.getCurrentQuestion === 6"
       question-title="Отдохните пару секунд, еще раз Выберите цвет, который сейчас наиболее Вам приятен:"
-      name="color-second"
       :values="[
         '#A8A8A8',
         '#46B2AC',
@@ -65,6 +59,39 @@
       name="cities"
       :values="['Вашингтон', 'Лондон', 'Париж', 'Нью-Йорк', 'Каир', 'Оттава']"
     />
+    <card-question
+      v-if="this.$store.getters.getCurrentQuestion === 8"
+      question-title="Выберите правильную фигуру из четырёх пронумерованных."
+      image="figure"
+      :values="[1, 2, 3, 4]"
+    />
+    <base-question
+      v-if="this.$store.getters.getCurrentQuestion === 9"
+      question-title="Вам привычнее и важнее:"
+      :values="[
+        'Наслаждаться каждой минутой проведенного времени',
+        'Быть устремленными мыслями в будущее',
+        'Учитывать в ежедневной практике прошлый опыт',
+      ]"
+    />
+    <base-question
+      v-if="this.$store.getters.getCurrentQuestion === 10"
+      question-title="Какое определение, по-Вашему, больше подходит к этому геометрическому изображению:"
+      :values="[
+        'Оно остроконечное',
+        'Оно устойчиво',
+        'Оно-находится в состоянии равновесия',
+      ]"
+      :image="true"
+    />
+    <card-question
+      v-if="this.$store.getters.getCurrentQuestion === 11"
+      question-title="Вставьте подходящее число"
+      image="star"
+      :values="[34, 36, 53, 44, 66, 42]"
+    />
+    <load-data v-if="spinnerIsOn" />
+    <result-data v-if="this.$store.getters.getPass" />
   </div>
 </template>
 
@@ -73,6 +100,9 @@ import TitleLogo from "../components/UI/TitleLogo.vue";
 import ProgressBar from "../components/UI/ProgressBar.vue";
 import BaseQuestion from "../components/questions/BaseQuestion.vue";
 import ColorQuestion from "../components/questions/ColorQuestion.vue";
+import CardQuestion from "../components/questions/CardQuestion.vue";
+import LoadData from "../components/LoadData.vue";
+import ResultData from "../components/ResultData.vue";
 
 export default {
   components: {
@@ -80,6 +110,18 @@ export default {
     ProgressBar,
     BaseQuestion,
     ColorQuestion,
+    CardQuestion,
+    LoadData,
+    ResultData,
+  },
+  computed: {
+    spinnerIsOn() {
+      return (
+        this.$store.getters.getCurrentQuestion ===
+          this.$store.getters.getNumberOfQuestions &&
+        !this.$store.getters.getPass
+      );
+    },
   },
 };
 </script>
