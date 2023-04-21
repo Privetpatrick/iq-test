@@ -70,6 +70,9 @@ export default {
       }
     },
   },
+  unmounted() {
+    if (this.intervalID) clearInterval(this.intervalID);
+  },
 };
 </script>
 

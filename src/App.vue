@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <base-container v-if="!burgerMenuIsOpen">
+    <base-container v-show="!burgerMenuIsOpen">
       <nav-bar @openMenu="burgerToggle" />
       <router-view />
     </base-container>
-    <base-container v-else>
+    <base-container v-show="burgerMenuIsOpen">
       <burger-menu @closeMenu="burgerToggle" />
     </base-container>
   </div>
